@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginForm /> renders correct empty form (this fails also if local vocabulary changes 1`] = `
+<div>
+  <form
+    onSubmit={[Function]}
+  >
+    <h2>
+      KIRJAUTUMINEN
+    </h2>
+    <div>
+      KÄYTTÄJÄNIMI
+      <input
+        id="loginForm-username"
+        name="username"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </div>
+    <div>
+      SALASANA
+      <input
+        id="loginForm-password"
+        name="password"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+    </div>
+    <button
+      id="loginForm-button-login"
+      type="submit"
+    >
+      KIRJAUDU
+    </button>
+  </form>
+  <button
+    id="loginForm-button-back"
+    onClick={[Function]}
+  >
+    TAKAISIN
+  </button>
+</div>
+`;

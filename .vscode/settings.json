@@ -3,5 +3,6 @@
   "prettier.requireConfig": true,
   "prettier.singleAttributePerLine": true,
   "prettier.useEditorConfig": true,
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "editor.formatOnSave": true
 }

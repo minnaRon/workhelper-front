@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginForm /> renders correct login info after login (this fails also if local vocabulary changes 1`] = `
+<div>
+  <div>
+    testName
+    <button
+      id="loginInfo-button-logout"
+      onClick={[Function]}
+    >
+      KIRJAUDU ULOS
+    </button>
+  </div>
+</div>
+`;

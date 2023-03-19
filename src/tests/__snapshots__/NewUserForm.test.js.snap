@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NewUserForm /> renders correct empty form (this fails also if local vocabulary changes 1`] = `
+<div>
+  <form
+    onSubmit={[Function]}
+  >
+    <h2>
+      UUSI KÄYTTÄJÄ
+    </h2>
+    <div>
+      KÄYTTÄJÄNIMI
+      <input
+        id="newUserForm-username"
+        maxLength={50}
+        minLength={4}
+        onChange={[Function]}
+        required={true}
+        type="text"
+        value=""
+      />
+    </div>
+    <div>
+      NIMI
+      <input
+        id="newUserForm-name"
+        maxLength={50}
+        minLength={3}
+        onChange={[Function]}
+        required={true}
+        type="text"
+        value=""
+      />
+    </div>
+    <div>
+      SALASANA
+      <input
+        id="newUserForm-password"
+        maxLength={50}
+        minLength={8}
+        onChange={[Function]}
+        required={true}
+        type="password"
+        value=""
+      />
+    </div>
+    <div>
+      SALASANA UUDELLEEN
+      <input
+        id="newUserForm-confirmPassword"
+        onChange={[Function]}
+        required={true}
+        type="password"
+        value=""
+      />
+    </div>
+    <button
+      id="newUserForm-button-submit"
+      type="submit"
+    >
+      TALLENNA JA KIRJAUDU
+    </button>
+  </form>
+  <button
+    id="newUserForm-button-back"
+    onClick={[Function]}
+  >
+    TAKAISIN
+  </button>
+</div>
+`;
