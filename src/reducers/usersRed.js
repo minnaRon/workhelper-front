@@ -11,7 +11,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { showNotification } from './notificationRed'
 import { loginUser } from './userRed'
-import usersService from '../services/usersSer'
+import { useService } from '../hooks'
+
+const { service } = useService('/api/users')
 
 /**
  * Reducer usersSlice
@@ -52,7 +54,7 @@ export const addNewUser = (newUser) => {
     const state = getState()
     const m = state.vocabulary.vocabulary.checked.notificationMessages
 
-    usersService
+    service
       .create(newUser)
       .then((response) => {
         //console.log('--usersRed--addNewUser--response--', response)

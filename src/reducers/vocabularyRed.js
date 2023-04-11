@@ -9,7 +9,9 @@
  */
 import { createSlice } from '@reduxjs/toolkit'
 import { showNotification } from './notificationRed'
-import vocabularyService from '../services/vocabularySer'
+import { useService } from '../hooks'
+
+const { service } = useService('/api/vocabularies')
 
 /**
  * Reducer vocabularySlice
@@ -42,7 +44,7 @@ export const { setVocabulary, addVocabulary } = vocabularySlice.actions
 export const chooseLanguage = (languageId) => {
   //console.log('--vocabularyRed--chooseLanguage--languageId--', languageId)
   return async (dispatch) => {
-    const vocabulary = await vocabularyService.get(languageId)
+    const vocabulary = await service.get(languageId)
     //console.log('--vocabularyRed--changeLanguage--vocabulary--', vocabulary[0])
     await dispatch(setVocabulary(vocabulary))
   }
@@ -58,7 +60,7 @@ export const addNewVocabulary = (newVocabulary) => {
     const state = getState()
     const m = state.vocabulary.vocabulary.checked.notificationMessages
     console.log('--addNewvocabulary needs to change message to use vocabulary: ', m)
-    vocabularyService
+    service
       .create(newVocabulary)
       .then((response) => {
         //console.log('--vocabularyRed--addNewVocabulary--response--', response)

@@ -11,7 +11,9 @@
  */
 import { createSlice } from '@reduxjs/toolkit'
 import { showNotification } from './notificationRed'
-import languagesService from '../services/languagesSer'
+import { useService } from '../hooks'
+
+const { service } = useService('/api/languages')
 
 /**
  * Reducer languageSlice
@@ -43,7 +45,7 @@ export const { setlanguages, addLanguage } = languagesSlice.actions
  */
 export const initializeLanguages = () => {
   return async (dispatch) => {
-    const languages = await languagesService.getAll()
+    const languages = await service.getAll()
     //console.log('--languageRed--initializeLanguages--languages--', languages)
     await dispatch(setlanguages(languages))
   }
@@ -59,7 +61,7 @@ export const addNewLanguage = (newLanguage) => {
     const state = getState()
     const m = state.vocabulary.vocabulary.checked.notificationMessages
 
-    languagesService
+    service
       .create(newLanguage)
       .then((response) => {
         //console.log('--languageRed--addnewLanguage--response--', response)

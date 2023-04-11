@@ -49,7 +49,7 @@ const App = () => {
     // const initializeVocabulary = async () => {
     const language = languages.filter((l) => l.code === 'fin')[0]
     if (language) {
-      console.log('--app--useEffect--language--', language)
+      //console.log('--app--useEffect--language--', language)
       dispatch(chooseLanguage(language.id))
     }
   }, [languages])

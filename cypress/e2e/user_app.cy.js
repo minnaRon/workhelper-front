@@ -95,7 +95,7 @@ describe('When new user ', function () {
       cy.get('#newUserForm-confirmPassword').type('differentPassword')
       cy.get('#newUserForm-button-submit').click()
       cy.wait(1000)
-      cy.contains('SALASANAT EIVÄT TÄSMÄÄ, TARKISTA SALASANAT')
+      cy.contains('Salasanat eivät täsmää, tarkista salasanat')
     })
     describe('When already one user in db', function () {
       beforeEach(function () {
