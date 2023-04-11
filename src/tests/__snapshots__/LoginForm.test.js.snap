@@ -9,7 +9,7 @@ exports[`<LoginForm /> renders correct empty form (this fails also if local voca
       KIRJAUTUMINEN
     </h2>
     <div>
-      KÄYTTÄJÄNIMI
+      käyttäjänimi
       <input
         id="loginForm-username"
         name="username"
@@ -19,7 +19,7 @@ exports[`<LoginForm /> renders correct empty form (this fails also if local voca
       />
     </div>
     <div>
-      SALASANA
+      salasana
       <input
         id="loginForm-password"
         name="password"

@@ -43,27 +43,35 @@ export const { setUser } = userSlice.actions
  * * properties: username and password
  */
 export const loginUser = (credentials) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const state = getState()
+    //console.log('--userRed--loginuser--state--', state)
+    //console.log('--userRed--loginuser--vocabulary--', vocabulary)
+    const m = state.vocabulary.vocabulary.checked.notificationMessages
+    //console.log('--userRed--loginuser--m--', m)
     loginService
       .login(credentials)
       .then((loggedUser) => {
         window.localStorage.setItem('loggedWorkappUser', JSON.stringify(loggedUser))
         //setTokens
         dispatch(setUser(loggedUser))
-        dispatch(showNotification(`TERVETULOA ${loggedUser.name}, TYÖN ILOA!`))
+        dispatch(
+          showNotification(
+            `${m.userRedIloginUserstart} ${loggedUser.name}, ${m.userRedIloginUserend}`
+          )
+        )
       })
       .catch((error) => {
         dispatch(
           showNotification(
-            'KIRJAUTUMISTIEDOISSA OLI VIRHE: ' +
-              error.response.data.error +
-              ', YRITÄ UUDELLEEN',
+            m.userRedEloginUserstart + error.response.data.error + m.userRedEloginUserend,
             'error'
           )
         )
       })
   }
 }
+
 /**
  * Action creator logout
  * @description Returns a function to remove user's token, username and name from localStorage,
@@ -73,10 +81,14 @@ export const loginUser = (credentials) => {
  * * properties: token, username, name
  */
 export const logout = (user) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const state = getState()
+    const m = state.vocabulary.vocabulary.checked.notificationMessages
     window.localStorage.removeItem('loggedWorkappUser')
     await dispatch(setUser(null))
-    dispatch(showNotification(`HEIPÄ HEI ${user.name}, NÄHDÄÄN TAAS!`))
+    dispatch(
+      showNotification(`${m.userRedIlogoutstart} ${user.name}, ${m.userRedIlogoutend}`)
+    )
   }
 }
 

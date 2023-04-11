@@ -18,6 +18,21 @@ describe('<NewUserForm />', () => {
   beforeEach(() => {
     store = mockStore({
       users: [],
+      vocabulary: {
+        vocabulary: {
+          checked: {
+            newuserform: {
+              NUFH2headlineT: 'UUSI KÄYTTÄJÄ',
+              NUFIusernameT: 'käyttäjänimi',
+              NUFInameT: 'nimi',
+              NUFIpasswordT: 'salasana',
+              NUFIconfirmPasswordT: 'salasana uudelleen',
+              NUFBsubmitT: 'TALLENNA JA KIRJAUDU',
+              NUFBbackT: 'TAKAISIN',
+            },
+          },
+        },
+      },
     })
 
     component = renderer.create(

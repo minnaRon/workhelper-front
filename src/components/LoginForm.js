@@ -18,9 +18,14 @@ import { loginUser } from '../reducers/userRed'
 const LoginForm = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const user = useSelector((state) => state.user)
+  const vocabulary = useSelector((state) => state.vocabulary) //.loginform)
+  // console.log('--loginform--vocabulary--', vocabulary)
+  const v = vocabulary.vocabulary.checked.loginform
+  // console.log('--loginform--m--', m)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const user = useSelector((state) => state.user)
+
   /**
    * @description Function handles user's login inputs after the form is submitted.
    * @param {*} event - not in use here,
@@ -32,6 +37,7 @@ const LoginForm = () => {
     event.preventDefault()
     await dispatch(loginUser({ username, password }))
     if (user) {
+      //console.log('--loginform--useeffect--user', user)
       setUsername('')
       setPassword('')
     }
@@ -45,14 +51,14 @@ const LoginForm = () => {
     if (user) {
       navigate('/todaysworkplan')
     }
-  }, [dispatch])
+  }, [user])
 
   return (
     <div>
       <form onSubmit={handleLogin}>
-        <h2>KIRJAUTUMINEN</h2>
+        <h2>{v.LFH2headlineT}</h2>
         <div>
-          KÄYTTÄJÄNIMI
+          {v.LFIusernameT}
           <input
             type="text"
             id="loginForm-username"
@@ -62,7 +68,7 @@ const LoginForm = () => {
           />
         </div>
         <div>
-          SALASANA
+          {v.LFIpasswordT}
           <input
             type="password"
             id="loginForm-password"
@@ -72,11 +78,11 @@ const LoginForm = () => {
           />
         </div>
         <button type="submit" id="loginForm-button-login">
-          KIRJAUDU
+          {v.LFBsubmitT}
         </button>
       </form>
       <button id="loginForm-button-back" onClick={() => navigate('/')}>
-        TAKAISIN
+        {v.LFBbackT}
       </button>
     </div>
   )

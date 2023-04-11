@@ -9,7 +9,7 @@ exports[`<NewUserForm /> renders correct empty form (this fails also if local vo
       UUSI KÄYTTÄJÄ
     </h2>
     <div>
-      KÄYTTÄJÄNIMI
+      käyttäjänimi
       <input
         id="newUserForm-username"
         maxLength={50}
@@ -21,7 +21,7 @@ exports[`<NewUserForm /> renders correct empty form (this fails also if local vo
       />
     </div>
     <div>
-      NIMI
+      nimi
       <input
         id="newUserForm-name"
         maxLength={50}
@@ -33,7 +33,7 @@ exports[`<NewUserForm /> renders correct empty form (this fails also if local vo
       />
     </div>
     <div>
-      SALASANA
+      salasana
       <input
         id="newUserForm-password"
         maxLength={50}
@@ -45,7 +45,7 @@ exports[`<NewUserForm /> renders correct empty form (this fails also if local vo
       />
     </div>
     <div>
-      SALASANA UUDELLEEN
+      salasana uudelleen
       <input
         id="newUserForm-confirmPassword"
         onChange={[Function]}

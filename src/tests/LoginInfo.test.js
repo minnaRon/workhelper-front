@@ -22,6 +22,25 @@ describe('<LoginForm />', () => {
         name: 'testName',
         password: 'testPassword',
       },
+      vocabulary: {
+        vocabulary: {
+          checked: {
+            logininfo: {
+              LIBlogoutT: 'KIRJAUDU ULOS',
+            },
+            notificationMessages: {
+              langRedErroraddNewLanguage: 'uuden kielen lisääminen epäonnistui: ',
+              userRedIloginUserstart: 'Tervetuloa',
+              userRedIloginUserend: 'työn iloa!',
+              userRedEloginUserstart: 'Kirjautumistiedoissa oli virhe: ',
+              userRedEloginUserend: ', yritä uudelleen',
+              userRedIlogoutstart: 'Heipä hei',
+              userRedIlogoutend: 'nähdään taas!',
+              usersRedEaddNewUser: 'Uuden käyttäjän luominen epäonnistui: ',
+            },
+          },
+        },
+      },
     })
 
     component = renderer.create(

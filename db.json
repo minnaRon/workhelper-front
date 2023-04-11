@@ -2,9 +2,104 @@
   "users": [
     {
       "username": "minna",
-      "name": "minna",
+      "name": "minnaNimi",
       "password": "salainen",
-      "id": 1
+      "language": "64285ce2b1863882baf0ac75"
+    },
+    {
+      "username": "englishUser",
+      "name": "englishName",
+      "password": "englishPassword",
+      "language": "64285d05b1863882baf0ac77"
+    }
+  ],
+  "vocabularies": [
+    {
+      "language": "64285ce2b1863882baf0ac75",
+      "vocabulary": {
+        "checked": {
+          "loginform": {
+            "LFH2headlineT": "KIRJAUTUMINEN",
+            "LFIusernameT": "käyttäjänimi",
+            "LFIpasswordT": "salasana",
+            "LFBsubmitT": "KIRJAUDU",
+            "LFBbackT": "TAKAISIN"
+          }
+        },
+        "newPlaces": {
+          "loginform": {
+            "LFIforDevT": {
+              "eng": "DEV HELPER INPUT",
+              "usersWhoTranslate": [
+                "642861b1b1863882baf0ac83"
+              ],
+              "translations": {
+                "EKA KÄÄNNÖS INPUT": 1
+              }
+            },
+            "LFBforDevT": {
+              "eng": "DEV HELPER BUTTON",
+              "usersWhoTranslate": [
+                "642861b1b1863882baf0ac83",
+                "642862c7b1863882baf0ac86"
+              ],
+              "translations": {
+                "EKA KÄÄNNÖS BUTTON": 1,
+                "TOKA KÄÄNNÖS BUTTON": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "language": "64285d05b1863882baf0ac77",
+      "vocabulary": {
+        "checked": {
+          "loginform": {
+            "LFH2headlineT": "LOG IN",
+            "LFIusernameT": "username",
+            "LFIpasswordT": "password",
+            "LFBsubmitT": "LOGIN",
+            "LFBbackT": "BACK",
+            "LFIforDevT": "DEV HELPER INPUT",
+            "LFBforDevT": "DEV HELPER BUTTON"
+          }
+        }
+      }
+    }
+  ],
+  "languages": [
+    {
+      "code": "eng",
+      "nameInEnglish": "English",
+      "nameLocal": "English",
+      "defaultFlagUnicode": "&#x1f1ec;&#x1f1e7;"
+    },
+    {
+      "code": "fin",
+      "nameInEnglish": "Finnish",
+      "nameLocal": "suomi",
+      "defaultFlagUnicode": "&#x1f1eb;&#x1f1ee;"
+    }
+  ],
+  "countries": [
+    {
+      "alpha2Code": "FI",
+      "nameEng": "Finland",
+      "nameNative": "Suomi",
+      "languages": [
+        "fin",
+        "swe"
+      ],
+      "currency": "EUR",
+      "utc_offset": [
+        "+03:00"
+      ],
+      "latlng": [
+        64.0,
+        26.0
+      ]
     }
   ]
 }

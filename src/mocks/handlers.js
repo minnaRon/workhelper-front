@@ -1,23 +1,16 @@
 /**
  * using msw with integration tests
  * msw -files: setupTest.js, mocks/server.js, mocks/handlers.js
+ * imports mock_db -file - includes db collections as arrays
  * msw handlers: https://mswjs.io/docs/api/rest
  */
 import { rest } from 'msw'
-
-const testUsers = [
-  {
-    username: 'testUsername',
-    name: 'testName',
-    password: 'testPassword',
-    id: 'testid6416494c5fa80158b4c42704',
-  },
-]
+import mock_db from './mock_db'
 
 const testToken = 'testToken'
 
 export const handlers = [
-  //add new user
+  /* add new user */
   rest.post('/api/users', async (req, res, ctx) => {
     const { username, name, password: passwordFromReq } = req.body
 
@@ -31,7 +24,7 @@ export const handlers = [
       )
     }
 
-    if (username === testUsers[0].username) {
+    if (username === mock_db.testUsers[0].username) {
       return res(
         ctx.status(400),
         ctx.json({ error: 'username must be unique' }),
@@ -84,19 +77,19 @@ export const handlers = [
       password: 'testPassword',
       joiningday: new Date(),
       lastVisited: new Date(),
-      id: testUsers[0].id,
+      id: mock_db.testUsers[0].id,
     }
-    testUsers.push(newUser)
+    mock_db.testUsers.push(newUser)
     // eslint-disable-next-line no-unused-vars
     const { password, ...userToReturn } = newUser
 
     return res(ctx.status(201), ctx.json(userToReturn), ctx.delay(150))
   }),
 
-  //login
+  /* login */
   rest.post('/api/login', async (req, res, ctx) => {
     const { username, password } = req.body
-    const user = testUsers.filter((u) => u.username === username)[0]
+    const user = mock_db.testUsers.filter((u) => u.username === username)[0]
 
     if (!user || password !== user.password) {
       return res(
@@ -117,5 +110,21 @@ export const handlers = [
       }),
       ctx.delay(150)
     )
+  }),
+
+  /* get all languages */
+  rest.get('/api/languages', async (req, res, ctx) => {
+    //console.log('--handlers--get all languages--languages--', mock_db.languages)
+    return res(ctx.status(200), ctx.json(mock_db.languages), ctx.delay(150))
+  }),
+
+  /* get vocabulary with user's chosen languageId */
+  rest.get('/api/vocabularies/:languageId', async (req, res, ctx) => {
+    const languageId = req.params.languageId
+    const vocabulary = await mock_db.vocabularies.filter(
+      (v) => v.language === languageId
+    )[0]
+    //console.log('--handlers--get vocabulary--vocabulary--', vocabulary)
+    return res(ctx.status(200), ctx.json(vocabulary), ctx.delay(150))
   }),
 ]

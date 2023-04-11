@@ -14,7 +14,6 @@
     "redux-thunk": "^2.4.2",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "http://localhost:8080",
   "scripts": {
     "start": "react-scripts start",
     "server": "json-server -p3004 --watch db.json",
@@ -24,6 +23,7 @@
     "cypress:open": "cypress open",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:8080",
   "eslintConfig": {
     "extends": [
       "react-app",

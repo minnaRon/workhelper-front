@@ -28,6 +28,11 @@ const NewUserForm = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const user = useSelector((state) => state.user)
+  const vocabulary = useSelector((state) => state.vocabulary) //.loginform)
+  //console.log('--newuserform--vocabulary--', vocabulary)
+  const v = vocabulary.vocabulary.checked.newuserform
+  const m = vocabulary.vocabulary.checked.notificationMessages
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -44,9 +49,9 @@ const NewUserForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     if (password !== confirmPassword) {
-      dispatch(showNotification('SALASANAT EIVÄT TÄSMÄÄ, TARKISTA SALASANAT', 'error'))
+      dispatch(showNotification(m.NUFEhandleSubmitPasswordDiff, 'error'))
     } else if (password.length < 8 || password.length > 50) {
-      dispatch(showNotification('SALASANAN PITUUS TULEE OLLA 8-50 MERKKIÄ', 'error'))
+      dispatch(showNotification(m.NUFEhandleSubmitPasswordLength, 'error'))
     } else {
       dispatch(addNewUser({ username, name, password }))
       if (user) {
@@ -66,14 +71,14 @@ const NewUserForm = () => {
     if (user) {
       navigate('/todaysworkplan')
     }
-  }, [dispatch])
+  }, [dispatch, user])
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h2>UUSI KÄYTTÄJÄ</h2>
+        <h2>{v.NUFH2headlineT}</h2>
         <div>
-          KÄYTTÄJÄNIMI
+          {v.NUFIusernameT}
           <input
             type="text"
             id="newUserForm-username"
@@ -85,7 +90,7 @@ const NewUserForm = () => {
           />
         </div>
         <div>
-          NIMI
+          {v.NUFInameT}
           <input
             type="text"
             id="newUserForm-name"
@@ -97,7 +102,7 @@ const NewUserForm = () => {
           />
         </div>
         <div>
-          SALASANA
+          {v.NUFIpasswordT}
           <input
             type="password"
             id="newUserForm-password"
@@ -109,7 +114,7 @@ const NewUserForm = () => {
           />
         </div>
         <div>
-          SALASANA UUDELLEEN
+          {v.NUFIconfirmPasswordT}
           <input
             type="password"
             id="newUserForm-confirmPassword"
@@ -119,11 +124,11 @@ const NewUserForm = () => {
           />
         </div>
         <button type="submit" id="newUserForm-button-submit">
-          TALLENNA JA KIRJAUDU
+          {v.NUFBsubmitT}
         </button>
       </form>
       <button id="newUserForm-button-back" onClick={() => navigate('/')}>
-        TAKAISIN
+        {v.NUFBbackT}
       </button>
     </div>
   )

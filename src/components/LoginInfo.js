@@ -7,11 +7,15 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout } from '../reducers/userRed'
+import LanguageSelector from './LanguageSelector'
 
 const LoginInfo = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector((state) => state.user)
+  const vocabulary = useSelector((state) => state.vocabulary) //.loginform)
+  //console.log('--loginInfo--vocabulary--', vocabulary)
+  const v = vocabulary.vocabulary.checked.logininfo
 
   /**
    * @description Function handles user's logout after logout -button is pressed.
@@ -25,11 +29,12 @@ const LoginInfo = () => {
 
   return (
     <div>
+      <LanguageSelector />
       {user ? (
         <div>
           {user.name}
           <button id="loginInfo-button-logout" onClick={logoutHandler}>
-            KIRJAUDU ULOS
+            {v.LIBlogoutT}
           </button>
         </div>
       ) : null}

@@ -7,6 +7,7 @@
  * Exports function create as default
  */
 import axios from 'axios'
+
 const baseUrl = '/api/users'
 
 /**

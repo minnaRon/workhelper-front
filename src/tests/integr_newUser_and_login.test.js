@@ -41,7 +41,6 @@ describe('<NewUserForm />', () => {
     container = await renderWithProviders(<App />).container
     await user.click(container.querySelector('#welcome-link-newUser'))
   })
-
   test('when back -button clicked should return to the welcome -view', async () => {
     expect(container.querySelector('#newUserForm-username')).toBeInTheDocument()
     const backButton = container.querySelector('#newUserForm-button-back')
@@ -118,7 +117,7 @@ describe('<NewUserForm />', () => {
     await user.type(passwordInput, testUser.password)
     await user.type(confirmPasswordInput, testUser.password)
     await user.click(saveButton)
-    const notificationElement = await screen.findByText(/TERVETULOA/i)
+    const notificationElement = await screen.findByText(/Tervetuloa/i)
     expect(notificationElement).toBeInTheDocument()
     screen.findByText(/WorkTodayPlanForm/i)
     const planComponent = container.querySelector('#todayplanformsidfortests')
@@ -134,6 +133,7 @@ describe('<LoginForm />', () => {
     await window.localStorage.removeItem('loggedWorkappUser')
     container = await renderWithProviders(<App />).container
     await user.click(container.querySelector('#welcome-button-login'))
+    //screen.debug()
   })
 
   test('when back -button clicked should return to the welcome -view', async () => {
@@ -169,6 +169,7 @@ describe('<LoginForm />', () => {
     await user.type(usernameInput, testUser.username)
     await user.type(passwordInput, testUser.password)
     await user.click(loginButton)
+    // screen.debug()
     await screen.findByText(/WorkTodayPlanForm/i)
     const planComponent = container.querySelector('#todayplanformsidfortests')
     expect(planComponent).toBeInTheDocument()

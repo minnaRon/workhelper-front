@@ -18,6 +18,19 @@ describe('<LoginForm />', () => {
   beforeEach(() => {
     store = mockStore({
       user: null,
+      vocabulary: {
+        vocabulary: {
+          checked: {
+            loginform: {
+              LFH2headlineT: 'KIRJAUTUMINEN',
+              LFIusernameT: 'käyttäjänimi',
+              LFIpasswordT: 'salasana',
+              LFBsubmitT: 'KIRJAUDU',
+              LFBbackT: 'TAKAISIN',
+            },
+          },
+        },
+      },
     })
 
     component = renderer.create(

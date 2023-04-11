@@ -48,7 +48,10 @@ export const { addUser } = usersSlice.actions
  */
 export const addNewUser = (newUser) => {
   //console.log('--usersRed--addNewUser--newUser--', newUser)
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const state = getState()
+    const m = state.vocabulary.vocabulary.checked.notificationMessages
+
     usersService
       .create(newUser)
       .then((response) => {
@@ -57,11 +60,9 @@ export const addNewUser = (newUser) => {
         dispatch(loginUser({ username: response.username, password: newUser.password }))
       })
       .catch((error) => {
+        //console.log('--usersRed--addNewUser--catch--', error.response.data.error)
         dispatch(
-          showNotification(
-            'UUDEN KÄYTTÄJÄN LUOMINEN EPÄONNISTUI: ' + error.response.data.error,
-            'error'
-          )
+          showNotification(m.usersRedEaddNewUser + error.response.data.error, 'error')
         )
       })
   }

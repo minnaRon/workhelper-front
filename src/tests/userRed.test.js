@@ -70,7 +70,25 @@ describe('thunks', () => {
   describe('login with mocked dispatch', () => {
     it('should login and dispatch setUser action with correct payload', async () => {
       const dispatch = jest.fn()
-      const state = { user: null }
+      const state = {
+        user: null,
+        vocabulary: {
+          vocabulary: {
+            checked: {
+              notificationMessages: {
+                langRedErroraddNewLanguage: 'uuden kielen lisääminen epäonnistui: ',
+                userRedIloginUserstart: 'Tervetuloa',
+                userRedIloginUserend: 'työn iloa!',
+                userRedEloginUserstart: 'Kirjautumistiedoissa oli virhe: ',
+                userRedEloginUserend: ', yritä uudelleen',
+                userRedIlogoutstart: 'Heipä hei',
+                userRedIlogoutend: 'nähdään taas!',
+                usersRedEaddNewUser: 'Uuden käyttäjän luominen epäonnistui: ',
+              },
+            },
+          },
+        },
+      }
       const thunk = loginUser({
         username: testUser.username,
         password: testUser.password,
