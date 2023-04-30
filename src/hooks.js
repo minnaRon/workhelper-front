@@ -42,24 +42,36 @@ export const useField = (type, id, defaultvalue = '') => {
  * @returns {object} service - Includes all functions (below) to communicate with the server.
  * functions @returns {object/array} response.data - Data from the response of the server:
  * * {function} getAll()          - res.data {array}: All resources from the baseUrl.
- * * {function} create(resource)  - res.data {object}: Created new resource based by param. object.
+ * * {function} create(resource)  - res.data {object}: Created new resource based by param. resource.
  * * {function} get(id)           - res.data {object}: Resource from the baseUrl + param. id.
+ * * {function} update(resource)  - res.data {object}: Updated resource from the baseUrl + id of the param. resource.
  */
 export const useService = (baseUrl) => {
+  let token = null
+  const setToken = (newToken) => {
+    token = `bearer ${newToken}`
+  }
+
   const getAll = async () => {
-    const response = await axios.get(baseUrl)
+    const response = await axios.get(baseUrl, { headers: { Authorization: token } })
     return response.data
   }
 
   const create = async (resource) => {
-    const response = await axios.post(baseUrl, resource)
+    const config = { headers: { Authorization: token } }
+    const response = await axios.post(baseUrl, resource, config)
     return response.data
   }
 
-  const get = async (objectId) => {
-    //console.log('--vocabularySer--get--language--', languageId)
-    const response = await axios.get(`${baseUrl}/${objectId}`)
-    //console.log('--vocabularySer--get--response.data--', response.data)
+  const get = async (resourceId) => {
+    const config = { headers: { Authorization: token } }
+    const response = await axios.get(`${baseUrl}/${resourceId}`, config)
+    return response.data
+  }
+
+  const update = async (resource) => {
+    const config = { headers: { Authorization: token } }
+    const response = await axios.put(`${baseUrl}/${resource.id}`, resource, config)
     return response.data
   }
 
@@ -67,6 +79,8 @@ export const useService = (baseUrl) => {
     create,
     getAll,
     get,
+    update,
+    setToken,
   }
 
   return { service }

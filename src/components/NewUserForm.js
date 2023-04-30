@@ -53,7 +53,7 @@ const NewUserForm = () => {
     } else if (password.length < 8 || password.length > 50) {
       dispatch(showNotification(m.NUFEhandleSubmitPasswordLength, 'error'))
     } else {
-      dispatch(addNewUser({ username, name, password }))
+      dispatch(addNewUser({ username, name, language: vocabulary.language, password }))
       if (user) {
         setUsername('')
         setName('')
@@ -69,7 +69,7 @@ const NewUserForm = () => {
    */
   useEffect(() => {
     if (user) {
-      navigate('/todaysworkplan')
+      navigate('/work')
     }
   }, [dispatch, user])
 

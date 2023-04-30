@@ -41,6 +41,7 @@ describe('When new user ', function () {
   })
   describe('When NewUserForm opened ', function () {
     beforeEach(function () {
+      localStorage.removeItem('loggedWorkappUser')
       cy.request({
         method: 'POST',
         url: 'http://localhost:8080/api/testing/reset',
@@ -99,6 +100,8 @@ describe('When new user ', function () {
     })
     describe('When already one user in db', function () {
       beforeEach(function () {
+        cy.reset_db(languages, vocabularies)
+        localStorage.removeItem('loggedWorkappUser')
         cy.createUser({
           username: 'cypressUsername',
           name: 'cypressName',

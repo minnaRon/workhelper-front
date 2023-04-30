@@ -14,6 +14,8 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../reducers/userRed'
+import { initializeWorks } from '../reducers/worksRed'
+import { initializeUsers } from '../reducers/usersRed'
 
 const LoginForm = () => {
   const [username, setUsername] = useState('')
@@ -30,28 +32,29 @@ const LoginForm = () => {
    * @description Function handles user's login inputs after the form is submitted.
    * @param {*} event - not in use here,
    * function uses state to store values: username and password.
-   * Dispatches login info to userReducer's login function and
-   * then resets local state values: username and password.
+   * Dispatches login info to userReducer's login function
    */
   const handleLogin = async (event) => {
     event.preventDefault()
     await dispatch(loginUser({ username, password }))
-    if (user) {
-      //console.log('--loginform--useeffect--user', user)
-      setUsername('')
-      setPassword('')
-    }
   }
 
   /**
    * Hook useEffect
-   * @description After the user is logged in navigates to workPlanView
+   * @description After the user is logged in dispatches users and
+   * user's works in the redux store,
+   * then resets local state values: username and password.
+   * navigates to path '/work'.
    */
   useEffect(() => {
-    if (user) {
-      navigate('/todaysworkplan')
+    if (user && username) {
+      dispatch(initializeUsers())
+      dispatch(initializeWorks())
+      setUsername('')
+      setPassword('')
+      navigate('/work')
     }
-  }, [user])
+  }, [handleLogin])
 
   return (
     <div>

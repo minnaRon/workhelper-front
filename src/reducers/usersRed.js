@@ -10,7 +10,7 @@
  */
 import { createSlice } from '@reduxjs/toolkit'
 import { showNotification } from './notificationRed'
-import { loginUser } from './userRed'
+import { loginUser, updateCurrentUser } from './userRed'
 import { useService } from '../hooks'
 
 const { service } = useService('/api/users')
@@ -26,12 +26,25 @@ const usersSlice = createSlice({
   name: 'users',
   initialState: [],
   reducers: {
+    setUsers(state, action) {
+      return action.payload
+    },
     addUser(state, action) {
       return [...state, action.payload]
     },
+    updateOne(state, { payload }) {
+      return state.map((u) => (u.id === payload.id ? payload : u))
+    },
   },
 })
-export const { addUser } = usersSlice.actions
+export const { setUsers, addUser, updateOne } = usersSlice.actions
+
+export const initializeUsers = () => {
+  return async (dispatch) => {
+    const users = await service.getAll()
+    dispatch(setUsers(users))
+  }
+}
 
 /**
  * Action creator addNewUser
@@ -67,6 +80,19 @@ export const addNewUser = (newUser) => {
           showNotification(m.usersRedEaddNewUser + error.response.data.error, 'error')
         )
       })
+  }
+}
+
+export const updateUser = (propertiesToUpdate) => {
+  return async (dispatch, getState) => {
+    const state = getState()
+    const userToUpdate = state.users.filter((u) => u.id === state.user.id)[0]
+
+    service.setToken(state.user.token)
+    const updatedUser = await service.update({ ...userToUpdate, ...propertiesToUpdate })
+
+    await dispatch(updateCurrentUser(propertiesToUpdate))
+    await dispatch(updateOne(updatedUser))
   }
 }
 

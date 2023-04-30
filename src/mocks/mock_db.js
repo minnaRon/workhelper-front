@@ -8,7 +8,17 @@ const testUsers = [
     username: 'testUsername',
     name: 'testName',
     password: 'testPassword',
+    works: [],
+    workTypes: ['working at home', 'studying'],
     id: 'testid6416494c5fa80158b4c42704',
+  },
+  {
+    username: 'testUsername2',
+    name: 'testName2',
+    password: 'testPassword2',
+    works: [],
+    workTypes: ['working at home', 'studying'],
+    id: 'testi2kaksi94c5fa80158b4c42704',
   },
 ]
 
@@ -26,6 +36,25 @@ const languages = [
     nameInEnglish: 'Finnish',
     nameLocal: 'suomi',
     defaultFlagCountrycode: 'FI',
+  },
+]
+
+const works = [
+  {
+    name: 'testWork',
+    isProject: true,
+    type: 'studying',
+    user: new Object({ id: 'testid6416494c5fa80158b4c42704' }),
+    active: true,
+    lastWorked: new Date(),
+  },
+  {
+    name: 'testWork2',
+    isProject: false,
+    type: 'studying2',
+    user: new Object({ id: 'testi2kaksi94c5fa80158b4c42704' }),
+    active: true,
+    lastWorked: new Date(),
   },
 ]
 
@@ -73,6 +102,17 @@ const vocabularies = [
           NUFBsubmitT: 'SAVE AND LOGIN',
           NUFBbackT: 'BACK',
         },
+        workselector: {
+          WSH1headlineT: 'Hello Work!',
+          WSSworkT: 'object of work: ',
+          WSInewWorkT: '...or add a new one: ',
+          WSInewWorkP: 'add a new work item',
+          WSCisProjectT: 'is a project',
+          WSRworkTypeT: 'way of working: ',
+          WSInewWorkTypeT: '...or add a new one: ',
+          WSInewWorkTypeP: 'add a new way of working',
+          WSBsubmitT: 'start working',
+        },
       },
     },
   },
@@ -117,6 +157,17 @@ const vocabularies = [
           NUFBsubmitT: 'TALLENNA JA KIRJAUDU',
           NUFBbackT: 'TAKAISIN',
         },
+        workselector: {
+          WSH1headlineT: 'Työn iloihin!',
+          WSSworkT: 'TYÖN KOHDE: ',
+          WSInewWorkT: '...TAI LISÄÄ UUSI: ',
+          WSInewWorkP: 'LISÄÄ UUSI TYÖ',
+          WSCisProjectT: 'ON PROJEKTI',
+          WSRworkTypeT: 'TYÖTAPA: ',
+          WSInewWorkTypeT: '...TAI LISÄÄ UUSI: ',
+          WSInewWorkTypeP: 'LISÄÄ UUSI TYÖTAPA',
+          WSBsubmitT: 'ALOITA TYÖT',
+        },
       },
       newPlaces: {
         loginform: {
@@ -141,4 +192,4 @@ const vocabularies = [
   },
 ]
 
-export default { testUsers, vocabularies, languages }
+export default { testUsers, vocabularies, languages, works }

@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WorkSelector /> renders correct empty form (this fails also if local vocabulary changes 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <h1>
+    Työn iloihin!
+  </h1>
+  <label>
+    TYÖN KOHDE: 
+    <select
+      id="workSelector-select-work"
+      onChange={[Function]}
+    >
+      <option
+        disabled=""
+        value="testWork1Id"
+      >
+        testWork1
+      </option>
+      <option
+        disabled=""
+        value="testWork2Id"
+      >
+        testWork2
+      </option>
+    </select>
+  </label>
+  <br />
+  <br />
+  ...TAI LISÄÄ UUSI: 
+  <input
+    id="workSelector-input-newWork"
+    onChange={[Function]}
+    placeholder="LISÄÄ UUSI TYÖ"
+    type="text"
+    value=""
+  />
+  <hr />
+  <input
+    checked={true}
+    id="workSelector-checkbox-isProject"
+    onChange={[Function]}
+    type="checkbox"
+  />
+  ON PROJEKTI
+  <hr />
+  <label>
+    TYÖTAPA: 
+    <div>
+      <input
+        checked={true}
+        disabled=""
+        name="work-type"
+        onChange={[Function]}
+        type="radio"
+      />
+      working at home
+    </div>
+    <div>
+      <input
+        checked={false}
+        disabled=""
+        name="work-type"
+        onChange={[Function]}
+        type="radio"
+      />
+      studying
+    </div>
+  </label>
+  <br />
+  ...TAI LISÄÄ UUSI: 
+  <input
+    id="workSelector-input-newWorkType"
+    onChange={[Function]}
+    placeholder="LISÄÄ UUSI TYÖTAPA"
+    type="text"
+    value=""
+  />
+  <hr />
+  <button
+    type="submit"
+  >
+    ALOITA TYÖT
+  </button>
+</form>
+`;

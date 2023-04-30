@@ -40,13 +40,13 @@ const vocabularySlice = createSlice({
 })
 export const { setVocabulary, addVocabulary } = vocabularySlice.actions
 
-//name better? handles errors? check this
-export const chooseLanguage = (languageId) => {
-  //console.log('--vocabularyRed--chooseLanguage--languageId--', languageId)
+//check error handling
+export const chooseVocabulary = (languageId) => {
   return async (dispatch) => {
-    const vocabulary = await service.get(languageId)
-    //console.log('--vocabularyRed--changeLanguage--vocabulary--', vocabulary[0])
-    await dispatch(setVocabulary(vocabulary))
+    if (languageId) {
+      const vocabulary = await service.get(languageId)
+      await dispatch(setVocabulary(vocabulary))
+    }
   }
 }
 

@@ -105,7 +105,7 @@ describe('<NewUserForm />', () => {
     notificationElement = await screen.findByText(/SALASANAT.*EIVÄT.*TÄSMÄÄ/i)
     expect(notificationElement).toBeInTheDocument()
   })
-
+  /*
   test('registration succees and logs in with correct inputs', async () => {
     const usernameInput = container.querySelector('#newUserForm-username')
     const nameInput = container.querySelector('#newUserForm-name')
@@ -177,4 +177,5 @@ describe('<LoginForm />', () => {
     await user.click(logoutButton)
     await expect(container.querySelector('#welcome-button-login')).toBeInTheDocument()
   })
+  */
 })

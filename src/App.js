@@ -5,19 +5,24 @@
  */
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import LoginForm from './components/LoginForm'
 import LoginInfo from './components/LoginInfo'
 import NewUserForm from './components/NewUserForm'
 import Notification from './components/Notification'
 import Welcome from './components/Welcome'
-import WorkTodayPlanForm from './components/WorkTodayPlanForm'
+import WorkMainView from './components/WorkMainView'
+import Working from './components/Working'
 import { setUser } from './reducers/userRed'
-import { chooseLanguage } from './reducers/vocabularyRed'
+import { chooseVocabulary } from './reducers/vocabularyRed'
 import { initializeLanguages } from './reducers/languagesRed'
+import { initializeWorks } from './reducers/worksRed'
+import { initializeUsers } from './reducers/usersRed'
+import { setCurrentWork, setCurrentView } from './reducers/workingRed'
 
 const App = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const user = useSelector((state) => state.user)
   //console.log('--app--user--', user)
   const languages = useSelector((state) => state.languages)
@@ -25,6 +30,8 @@ const App = () => {
 
   const vocabulary = useSelector((state) => state.vocabulary)
   //console.log('--app--vocabulary--', vocabulary)
+  const working = useSelector((state) => state.working)
+  //console.log('--app--working--', working)
 
   /**
    * Hook useEffect
@@ -46,11 +53,10 @@ const App = () => {
    * dispatch @params {string} language.id - Id of the language
    */
   useEffect(() => {
-    // const initializeVocabulary = async () => {
     const language = languages.filter((l) => l.code === 'fin')[0]
     if (language) {
       //console.log('--app--useEffect--language--', language)
-      dispatch(chooseLanguage(language.id))
+      dispatch(chooseVocabulary(language.id))
     }
   }, [languages])
 
@@ -65,14 +71,31 @@ const App = () => {
    */
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedWorkappUser')
-    if (loggedUserJSON) {
+    if (!user && loggedUserJSON !== null && loggedUserJSON !== 'null') {
       const user = JSON.parse(loggedUserJSON)
-      //console.log('--app--useEffect--loggeduser--', user)
       dispatch(setUser(user))
-      dispatch(chooseLanguage(user.language))
-      //setTokens here
+      dispatch(chooseVocabulary(user.language))
+      dispatch(initializeUsers())
+      dispatch(initializeWorks())
+
+      const workingJSON = window.localStorage.getItem('loggedWorkappWorking')
+      if (workingJSON) {
+        const { work, view } = JSON.parse(workingJSON)
+        dispatch(setCurrentWork(work))
+        dispatch(setCurrentView(view))
+        navigate(view)
+      }
     }
   }, [])
+
+  useEffect(() => {
+    window.localStorage.setItem('loggedWorkappUser', JSON.stringify(user))
+  }, [user])
+
+  useEffect(() => {
+    window.localStorage.setItem('loggedWorkappWorking', JSON.stringify(working))
+    navigate(working.view)
+  }, [working])
 
   if (!user && vocabulary) {
     return (
@@ -97,7 +120,8 @@ const App = () => {
           <Route path="/" element={<Welcome />} />
           <Route path="/users/newuser" element={<NewUserForm />} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/todaysworkplan" element={<WorkTodayPlanForm />} />
+          <Route path="/work" element={<WorkMainView />} />
+          <Route path="/working" element={<Working />} />
         </Routes>
       </div>
     )

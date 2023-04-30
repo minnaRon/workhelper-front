@@ -11,6 +11,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import loginService from '../services/loginSer'
 import { showNotification } from './notificationRed'
+import { setUsers } from './usersRed'
+import { setWorks } from './worksRed'
+import { setCurrentView, setCurrentWork } from './workingRed'
 
 /**
  * Reducer userSlice
@@ -25,9 +28,12 @@ const userSlice = createSlice({
     setUser(state, action) {
       return action.payload
     },
+    updateCurrentUser(state, { payload }) {
+      return { ...state, ...payload }
+    },
   },
 })
-export const { setUser } = userSlice.actions
+export const { setUser, updateCurrentUser } = userSlice.actions
 
 /**
  * Action creator login
@@ -41,6 +47,7 @@ export const { setUser } = userSlice.actions
  * * action creator showNotification is dispatched to notify user about login failed.
  * @param {object} credentials - User's credentials to log in.
  * * properties: username and password
+ * ({ token, username: user.username, name: user.name, works: user.works, workTypes: user.workTypes })
  */
 export const loginUser = (credentials) => {
   return (dispatch, getState) => {
@@ -52,9 +59,8 @@ export const loginUser = (credentials) => {
     loginService
       .login(credentials)
       .then((loggedUser) => {
-        window.localStorage.setItem('loggedWorkappUser', JSON.stringify(loggedUser))
-        //setTokens
         dispatch(setUser(loggedUser))
+        dispatch(setCurrentView('/work'))
         dispatch(
           showNotification(
             `${m.userRedIloginUserstart} ${loggedUser.name}, ${m.userRedIloginUserend}`
@@ -85,7 +91,12 @@ export const logout = (user) => {
     const state = getState()
     const m = state.vocabulary.vocabulary.checked.notificationMessages
     window.localStorage.removeItem('loggedWorkappUser')
+    window.localStorage.removeItem('loggedWorkappWorking')
     await dispatch(setUser(null))
+    await dispatch(setUsers(null))
+    await dispatch(setWorks([]))
+    await dispatch(setCurrentWork(null))
+    await dispatch(setCurrentView(null))
     dispatch(
       showNotification(`${m.userRedIlogoutstart} ${user.name}, ${m.userRedIlogoutend}`)
     )

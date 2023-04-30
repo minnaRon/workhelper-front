@@ -8,7 +8,7 @@
  * exports LanguageSelector as default
  */
 import { useDispatch, useSelector } from 'react-redux'
-import { chooseLanguage } from '../reducers/vocabularyRed'
+import { chooseVocabulary } from '../reducers/vocabularyRed'
 
 const LanguageSelector = () => {
   const languages = useSelector((state) => state.languages)
@@ -31,6 +31,7 @@ const LanguageSelector = () => {
   const vocabulary = useSelector((state) => state.vocabulary)
   //console.log('--Welcome--vocabulary--', vocabulary)
 
+  /*first language of the array as local language, others to the array of the other languages.*/
   const localLanguage = languages.filter((l) => l.id === vocabulary.language)[0]
   //console.log('--Welcome--localLanguage--', localLanguage)
   //console.log('--Welcome--localLanguageFlag--', localLanguage.defaultFlagUnicode)
@@ -50,15 +51,14 @@ const LanguageSelector = () => {
 
   /* set language for vocabulary as selected */
   const changeLanguage = (event) => {
-    //console.log('--Welcome--changeLanguage--event--', event)
-    dispatch(chooseLanguage(event.target.value))
+    dispatch(chooseVocabulary(event.target.value))
   }
 
   return (
     <div>
       <a
         id="languageSelector-button-localLanguage"
-        onClick={() => dispatch(chooseLanguage(localLanguage.id))}
+        onClick={() => dispatch(chooseVocabulary(localLanguage.id))}
       >
         {getFlagEmoji(localLanguage.defaultFlagCountrycode)}
       </a>
