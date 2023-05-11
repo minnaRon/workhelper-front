@@ -86,14 +86,6 @@ export const addWork = (workObject) => {
       })
       .catch((error) => {
         console.log('--worksRed--addWork--error--catch--', error.response.data.error)
-        /*
-        add this:
-        dispatch(
-      showNotification(
-        m.langRedErroraddNewWork + error.response.data.error,
-        'error'
-      )
-    )*/
       })
   }
 }

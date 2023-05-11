@@ -21,9 +21,7 @@ const LoginForm = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const vocabulary = useSelector((state) => state.vocabulary) //.loginform)
-  // console.log('--loginform--vocabulary--', vocabulary)
   const v = vocabulary.vocabulary.checked.loginform
-  // console.log('--loginform--m--', m)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector((state) => state.user)

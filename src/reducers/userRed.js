@@ -52,10 +52,7 @@ export const { setUser, updateCurrentUser } = userSlice.actions
 export const loginUser = (credentials) => {
   return (dispatch, getState) => {
     const state = getState()
-    //console.log('--userRed--loginuser--state--', state)
-    //console.log('--userRed--loginuser--vocabulary--', vocabulary)
     const m = state.vocabulary.vocabulary.checked.notificationMessages
-    //console.log('--userRed--loginuser--m--', m)
     loginService
       .login(credentials)
       .then((loggedUser) => {

@@ -2,9 +2,7 @@ import '../support/commands'
 import mock_db from '../../src/mocks/mock_db'
 
 const languages = mock_db.languages
-console.log('--user_app.cy--languages--', languages)
 const vocabularies = mock_db.vocabularies
-console.log('--user_app.cy--vocabularies--', vocabularies)
 
 describe('When new user ', function () {
   beforeEach(function () {

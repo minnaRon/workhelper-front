@@ -114,7 +114,6 @@ export const handlers = [
 
   /* get all languages */
   rest.get('/api/languages', async (req, res, ctx) => {
-    //console.log('--handlers--get all languages--languages--', mock_db.languages)
     return res(ctx.status(200), ctx.json(mock_db.languages), ctx.delay(150))
   }),
 
@@ -124,7 +123,6 @@ export const handlers = [
     const vocabulary = await mock_db.vocabularies.filter(
       (v) => v.language === languageId
     )[0]
-    //console.log('--handlers--get vocabulary--vocabulary--', vocabulary)
     return res(ctx.status(200), ctx.json(vocabulary), ctx.delay(150))
   }),
 ]

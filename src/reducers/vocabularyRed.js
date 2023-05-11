@@ -28,12 +28,6 @@ const vocabularySlice = createSlice({
       return action.payload
     },
     addVocabulary(state, { payload }) {
-      /*console.log(
-        '--vocabularyRed--slice--addText--state--action.payload--',
-        state,
-        payload
-      )
-      */
       return [...state, payload]
     },
   },
@@ -55,7 +49,6 @@ export const chooseVocabulary = (languageId) => {
  * ..in progress..
  */
 export const addNewVocabulary = (newVocabulary) => {
-  //console.log('--vocabularyRed--addNewVocabulary--newText--', newVocabulary)
   return (dispatch, getState) => {
     const state = getState()
     const m = state.vocabulary.vocabulary.checked.notificationMessages
@@ -63,15 +56,9 @@ export const addNewVocabulary = (newVocabulary) => {
     service
       .create(newVocabulary)
       .then((response) => {
-        //console.log('--vocabularyRed--addNewVocabulary--response--', response)
         dispatch(addVocabulary(response))
       })
       .catch((error) => {
-        /*console.log(
-          '--vocabularyRed--addNewVocabulary--catch--',
-          error.response.data.error
-        )
-        */
         dispatch(
           showNotification(
             'UUDEN TEKSTIN LISÄÄMINEN EPÄONNISTUI: ' + error.response.data.error,

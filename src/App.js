@@ -24,14 +24,9 @@ const App = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector((state) => state.user)
-  //console.log('--app--user--', user)
   const languages = useSelector((state) => state.languages)
-  //console.log('--app--languages--', languages[0])
-
   const vocabulary = useSelector((state) => state.vocabulary)
-  //console.log('--app--vocabulary--', vocabulary)
   const working = useSelector((state) => state.working)
-  //console.log('--app--working--', working)
 
   /**
    * Hook useEffect
@@ -39,7 +34,6 @@ const App = () => {
    */
   useEffect(() => {
     const initialize = async () => {
-      //console.log('--app--useEffect--eka')
       await dispatch(initializeLanguages())
     }
     initialize()
@@ -55,7 +49,6 @@ const App = () => {
   useEffect(() => {
     const language = languages.filter((l) => l.code === 'fin')[0]
     if (language) {
-      //console.log('--app--useEffect--language--', language)
       dispatch(chooseVocabulary(language.id))
     }
   }, [languages])

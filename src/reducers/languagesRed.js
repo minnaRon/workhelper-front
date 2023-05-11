@@ -27,11 +27,9 @@ const languagesSlice = createSlice({
   initialState: [],
   reducers: {
     setlanguages(state, action) {
-      //console.log('--languagesRed--setLanguages--action.payload--', action.payload)
       return [...action.payload]
     },
     addLanguage(state, { payload }) {
-      //console.log('--languagesRed--setLanguages--payload--', payload)
       return [...state, payload]
     },
   },
@@ -46,17 +44,15 @@ export const { setlanguages, addLanguage } = languagesSlice.actions
 export const initializeLanguages = () => {
   return async (dispatch) => {
     const languages = await service.getAll()
-    //console.log('--languageRed--initializeLanguages--languages--', languages)
     await dispatch(setlanguages(languages))
   }
 }
 
 /**
  * Action creator addnewLanguage
- * ..in progress..
+ * ..in progress..is needed later..
  */
 export const addNewLanguage = (newLanguage) => {
-  //console.log('--languageRed--addnewLanguage--newLanguage--', newLanguage)
   return (dispatch, getState) => {
     const state = getState()
     const m = state.vocabulary.vocabulary.checked.notificationMessages
@@ -64,11 +60,9 @@ export const addNewLanguage = (newLanguage) => {
     service
       .create(newLanguage)
       .then((response) => {
-        //console.log('--languageRed--addnewLanguage--response--', response)
         dispatch(addLanguage(response))
       })
       .catch((error) => {
-        //console.log('--languageRed--addnewLanguage--catch--', error.response.data.error)
         dispatch(
           showNotification(
             m.langRedErroraddNewLanguage + error.response.data.error,

@@ -19,7 +19,6 @@ const LanguageSelector = () => {
 
   /* prepares and returns flag emoji based by countryCode with 2 chars */
   const getFlagEmoji = (countryCode) => {
-    //console.log('--Welcome--countryCode--', countryCode)
     const codePoints = countryCode
       .toUpperCase()
       .split('')
@@ -29,19 +28,13 @@ const LanguageSelector = () => {
 
   /* gets vocabulary from redux store */
   const vocabulary = useSelector((state) => state.vocabulary)
-  //console.log('--Welcome--vocabulary--', vocabulary)
 
   /*first language of the array as local language, others to the array of the other languages.*/
   const localLanguage = languages.filter((l) => l.id === vocabulary.language)[0]
-  //console.log('--Welcome--localLanguage--', localLanguage)
-  //console.log('--Welcome--localLanguageFlag--', localLanguage.defaultFlagUnicode)
   const otherLanguages = languages.filter((l) => l.id !== localLanguage.id)
-
-  //console.log('--Welcome--otherLanguages--', otherLanguages)
 
   /* setSecondLanguage('eng') */
   const options = otherLanguages.map((language) => {
-    // console.log('--languageSelector--language.id--', language.id)
     return (
       <option key={language.id} value={language.id}>
         {getFlagEmoji(language.defaultFlagCountrycode)} {language.nameLocal}

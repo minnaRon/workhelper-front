@@ -14,7 +14,6 @@ const LoginInfo = () => {
   const navigate = useNavigate()
   const user = useSelector((state) => state.user)
   const vocabulary = useSelector((state) => state.vocabulary) //.loginform)
-  //console.log('--loginInfo--vocabulary--', vocabulary)
   const v = vocabulary.vocabulary.checked.logininfo
 
   /**

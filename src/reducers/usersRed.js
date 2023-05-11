@@ -62,7 +62,6 @@ export const initializeUsers = () => {
  * * properties: id, name, username, joiningday, lastVisited
  */
 export const addNewUser = (newUser) => {
-  //console.log('--usersRed--addNewUser--newUser--', newUser)
   return (dispatch, getState) => {
     const state = getState()
     const m = state.vocabulary.vocabulary.checked.notificationMessages
@@ -70,12 +69,10 @@ export const addNewUser = (newUser) => {
     service
       .create(newUser)
       .then((response) => {
-        //console.log('--usersRed--addNewUser--response--', response)
         dispatch(addUser(response))
         dispatch(loginUser({ username: response.username, password: newUser.password }))
       })
       .catch((error) => {
-        //console.log('--usersRed--addNewUser--catch--', error.response.data.error)
         dispatch(
           showNotification(m.usersRedEaddNewUser + error.response.data.error, 'error')
         )

@@ -29,7 +29,6 @@ const NewUserForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const user = useSelector((state) => state.user)
   const vocabulary = useSelector((state) => state.vocabulary) //.loginform)
-  //console.log('--newuserform--vocabulary--', vocabulary)
   const v = vocabulary.vocabulary.checked.newuserform
   const m = vocabulary.vocabulary.checked.notificationMessages
 
