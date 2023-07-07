@@ -19,6 +19,7 @@ import { initializeLanguages } from './reducers/languagesRed'
 import { initializeWorks } from './reducers/worksRed'
 import { initializeUsers } from './reducers/usersRed'
 import { setCurrentWork, setCurrentView } from './reducers/workingRed'
+import { Container } from '@mui/material'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -27,6 +28,7 @@ const App = () => {
   const languages = useSelector((state) => state.languages)
   const vocabulary = useSelector((state) => state.vocabulary)
   const working = useSelector((state) => state.working)
+  const { view } = useSelector((state) => state.working)
 
   /**
    * Hook useEffect
@@ -92,7 +94,7 @@ const App = () => {
 
   if (!user && vocabulary) {
     return (
-      <div>
+      <Container maxWidth="sm">
         <Notification />
         <LoginInfo />
         <Routes>
@@ -100,15 +102,15 @@ const App = () => {
           <Route path="/users/newuser" element={<NewUserForm />} />
           <Route path="/login" element={<LoginForm />} />
         </Routes>
-      </div>
+      </Container>
     )
   }
 
   if (user && vocabulary) {
     return (
-      <div>
+      <Container maxWidth="md" bgcolor="#333">
         <Notification />
-        <LoginInfo />
+        {view !== '/working' ? <LoginInfo /> : ''}
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/users/newuser" element={<NewUserForm />} />
@@ -116,7 +118,7 @@ const App = () => {
           <Route path="/work" element={<WorkMainView />} />
           <Route path="/working" element={<Working />} />
         </Routes>
-      </div>
+      </Container>
     )
   }
 }

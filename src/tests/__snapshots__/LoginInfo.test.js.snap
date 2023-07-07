@@ -1,15 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoginForm /> renders correct login info after login (this fails also if local vocabulary changes 1`] = `
-<div>
-  <div>
-    testName
-    <button
-      id="loginInfo-button-logout"
-      onClick={[Function]}
+<header
+  className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionStatic css-hip9hq-MuiPaper-root-MuiAppBar-root"
+>
+  <div
+    className="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-hyum1k-MuiToolbar-root"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"
     >
-      KIRJAUDU ULOS
-    </button>
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true css-1vd824g-MuiGrid-root"
+        style={
+          Object {
+            "display": "flex",
+            "justifyContent": "flex-start",
+          }
+        }
+      />
+      <div
+        className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-auto css-1wrgmsj-MuiGrid-root"
+      >
+        <div>
+          <div
+            aria-haspopup="true"
+            className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-4vb5ob-MuiAvatar-root"
+            id="loginInfo-avatar-user"
+            onClick={[Function]}
+          >
+            t
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</header>
 `;

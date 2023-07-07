@@ -36,7 +36,7 @@ export const { setNotification } = notificationSlice.actions
  * on the screen before setTimeout dispatches action setNotification to be null.
  */
 let timeoutId = null
-export const showNotification = (message, type = 'info', time = 3) => {
+export const showNotification = (message, type = 'success', time = 3) => {
   return (dispatch) => {
     dispatch(setNotification({ message, type }))
     if (timeoutId) {

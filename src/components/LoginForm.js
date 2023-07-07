@@ -16,15 +16,27 @@ import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../reducers/userRed'
 import { initializeWorks } from '../reducers/worksRed'
 import { initializeUsers } from '../reducers/usersRed'
+import { setCurrentView } from '../reducers/workingRed'
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper'
+import ButtonGroup from '@mui/material/ButtonGroup'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import LoginIcon from '@mui/icons-material/Login'
 
 const LoginForm = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const vocabulary = useSelector((state) => state.vocabulary) //.loginform)
+  const vocabulary = useSelector((state) => state.vocabulary)
   const v = vocabulary.vocabulary.checked.loginform
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector((state) => state.user)
+
+  useEffect(() => {
+    dispatch(setCurrentView('/login'))
+  }, [])
 
   /**
    * @description Function handles user's login inputs after the form is submitted.
@@ -55,37 +67,65 @@ const LoginForm = () => {
   }, [handleLogin])
 
   return (
-    <div>
+    <Paper elevation={4}>
       <form onSubmit={handleLogin}>
-        <h2>{v.LFH2headlineT}</h2>
-        <div>
-          {v.LFIusernameT}
-          <input
-            type="text"
-            id="loginForm-username"
-            name="username"
-            value={username}
-            onChange={({ target }) => setUsername(target.value)}
-          />
-        </div>
-        <div>
-          {v.LFIpasswordT}
-          <input
-            type="password"
-            id="loginForm-password"
-            name="password"
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <button type="submit" id="loginForm-button-login">
-          {v.LFBsubmitT}
-        </button>
+        <Grid
+          container
+          pb={4}
+          direction="column"
+          justifyContent="center"
+          align="center"
+          rowSpacing={2}
+        >
+          <Grid item xs mr={7}>
+            <Typography variant="h5">{v.LFH2headlineT}</Typography>
+          </Grid>
+          <Grid item xs>
+            <TextField
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              label={v.LFIusernameT}
+              type="text"
+              id="loginForm-username"
+              name="username"
+              value={username}
+              onChange={({ target }) => setUsername(target.value)}
+            />
+          </Grid>
+          <Grid item xs>
+            <TextField
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              label={v.LFIpasswordT}
+              type="password"
+              id="loginForm-password"
+              name="password"
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+            />
+          </Grid>
+          <Grid item xs ml={3}>
+            <ButtonGroup>
+              <Button
+                variant="outlined"
+                id="loginForm-button-back"
+                onClick={() => navigate('/')}
+              >
+                {v.LFBbackT}
+              </Button>
+              <Button
+                startIcon={<LoginIcon />}
+                variant="contained"
+                type="submit"
+                id="loginForm-button-login"
+              >
+                {v.LFBsubmitT}
+              </Button>
+            </ButtonGroup>
+          </Grid>
+        </Grid>
       </form>
-      <button id="loginForm-button-back" onClick={() => navigate('/')}>
-        {v.LFBbackT}
-      </button>
-    </div>
+    </Paper>
   )
 }
 

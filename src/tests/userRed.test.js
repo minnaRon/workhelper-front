@@ -95,7 +95,7 @@ describe('thunks', () => {
       })
       await thunk(dispatch, () => state, undefined)
       const { calls } = dispatch.mock
-      expect(calls).toHaveLength(2)
+      expect(calls).toHaveLength(3)
       expect(calls[0][0].type).toEqual('user/setUser')
       expect(calls[0][0].payload).toEqual({
         token: 'redToken',

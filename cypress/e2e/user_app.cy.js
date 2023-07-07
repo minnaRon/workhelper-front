@@ -105,6 +105,7 @@ describe('When new user ', function () {
           name: 'cypressName',
           password: 'cypressPassword',
         })
+        cy.visit('http://localhost:3000')
       })
       it('Fails to create if username already exists', function () {
         cy.contains('UUSI KÄYTTÄJÄ').click()
@@ -149,6 +150,7 @@ describe('When new user ', function () {
         cy.get('#loginForm-username').type('cypressUsername')
         cy.get('#loginForm-password').type('cypressPassword')
         cy.get('#loginForm-button-login').click()
+        cy.get('#loginInfo-avatar-user').click()
         cy.contains('KIRJAUDU ULOS').click()
         cy.contains('KIRJAUDU')
         cy.should('not.contain', 'KIRJAUDU ULOS')

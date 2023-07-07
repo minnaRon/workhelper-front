@@ -21,6 +21,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { showNotification } from '../reducers/notificationRed'
 import { addNewUser } from '../reducers/usersRed'
+import { setCurrentView } from '../reducers/workingRed'
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper'
+import Box from '@mui/material/Box'
+import ButtonGroup from '@mui/material/ButtonGroup'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import LoginIcon from '@mui/icons-material/Login'
 
 const NewUserForm = () => {
   const [username, setUsername] = useState('')
@@ -34,6 +43,10 @@ const NewUserForm = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    dispatch(setCurrentView('/users/newuser'))
+  }, [])
 
   /**
    * @description Function handles new user's register inputs after the form is submitted.
@@ -73,63 +86,93 @@ const NewUserForm = () => {
   }, [dispatch, user])
 
   return (
-    <div>
+    <Paper>
       <form onSubmit={handleSubmit}>
-        <h2>{v.NUFH2headlineT}</h2>
-        <div>
-          {v.NUFIusernameT}
-          <input
-            type="text"
-            id="newUserForm-username"
-            value={username}
-            minLength={4}
-            maxLength={50}
-            required
-            onChange={({ target }) => setUsername(target.value)}
-          />
-        </div>
-        <div>
-          {v.NUFInameT}
-          <input
-            type="text"
-            id="newUserForm-name"
-            value={name}
-            minLength={3}
-            maxLength={50}
-            required
-            onChange={({ target }) => setName(target.value)}
-          />
-        </div>
-        <div>
-          {v.NUFIpasswordT}
-          <input
-            type="password"
-            id="newUserForm-password"
-            value={password}
-            minLength={8}
-            maxLength={50}
-            required
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <div>
-          {v.NUFIconfirmPasswordT}
-          <input
-            type="password"
-            id="newUserForm-confirmPassword"
-            value={confirmPassword}
-            required
-            onChange={({ target }) => setConfirmPassword(target.value)}
-          />
-        </div>
-        <button type="submit" id="newUserForm-button-submit">
-          {v.NUFBsubmitT}
-        </button>
+        <Grid
+          container
+          pb={4}
+          direction="column"
+          justifyContent="center"
+          align="center"
+          rowSpacing={2}
+        >
+          <Grid item xs>
+            <Box sx={{ ml: -15 }}>
+              <Typography variant="h5">{v.NUFH2headlineT}</Typography>
+            </Box>
+          </Grid>
+          <Grid item xs>
+            <TextField
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              label={v.NUFIusernameT}
+              type="text"
+              id="newUserForm-username"
+              value={username}
+              minLength={4}
+              maxLength={50}
+              required
+              onChange={({ target }) => setUsername(target.value)}
+            />
+          </Grid>
+          <Grid item xs>
+            <TextField
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              label={v.NUFInameT}
+              type="text"
+              id="newUserForm-name"
+              value={name}
+              minLength={3}
+              maxLength={50}
+              required
+              onChange={({ target }) => setName(target.value)}
+            />
+          </Grid>
+          <Grid item xs>
+            <TextField
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              label={v.NUFIpasswordT}
+              type="password"
+              id="newUserForm-password"
+              value={password}
+              minLength={8}
+              maxLength={50}
+              required
+              onChange={({ target }) => setPassword(target.value)}
+            />
+          </Grid>
+          <Grid item xs>
+            <TextField
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              label={v.NUFIconfirmPasswordT}
+              type="password"
+              id="newUserForm-confirmPassword"
+              value={confirmPassword}
+              required
+              onChange={({ target }) => setConfirmPassword(target.value)}
+            />
+          </Grid>
+          <Grid item xs>
+            <ButtonGroup>
+              <Button id="newUserForm-button-back" onClick={() => navigate('/')}>
+                {v.NUFBbackT}
+              </Button>
+              <Button
+                endIcon={<LoginIcon />}
+                variant="contained"
+                type="submit"
+                id="newUserForm-button-submit"
+              >
+                {v.NUFBsubmitT}
+              </Button>
+            </ButtonGroup>
+          </Grid>
+        </Grid>
       </form>
-      <button id="newUserForm-button-back" onClick={() => navigate('/')}>
-        {v.NUFBbackT}
-      </button>
-    </div>
+    </Paper>
   )
 }
 

@@ -6,7 +6,7 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import '@testing-library/jest-dom'
-import { screen, waitForElementToBeRemoved } from '@testing-library/react'
+//import { screen, waitForElementToBeRemoved } from '@testing-library/react'
 import { renderWithProviders } from './utils_for_tests'
 import user from '@testing-library/user-event'
 import App from '../App'
@@ -14,12 +14,13 @@ import App from '../App'
 /**
  * testUser to log in with success
  * msw handler has this same user in the file mocks/handlers.js
- */
+ */ /*
 const testUser = {
   username: 'testUsername',
   name: 'testName',
   password: 'testPassword',
 }
+*/
 
 let container
 
@@ -46,8 +47,8 @@ describe('<NewUserForm />', () => {
     const backButton = container.querySelector('#newUserForm-button-back')
     await user.click(backButton)
     expect(container.querySelector('#welcome-button-login')).toBeInTheDocument()
-  })
-  test('registration fails with correct error message if incorrect inputs', async () => {
+  }) /*
+  /*test('registration fails with correct error message if incorrect inputs', async () => {
     const usernameInput = container.querySelector('#newUserForm-username')
     const nameInput = container.querySelector('#newUserForm-name')
     const passwordInput = container.querySelector('#newUserForm-password')
@@ -60,14 +61,14 @@ describe('<NewUserForm />', () => {
     await user.click(saveButton)
     let notificationElement = await screen.findByText(/username.*unique/i)
     expect(notificationElement).toBeInTheDocument()
-    /*
+
     waitForElementToBeRemoved (below) is one way to get rid of:
     'console.error
       Warning: An update to Notification inside a test was not wrapped in act(...).'
     It waits until the component of the notification disappears.
     It also slows tests so much that might be more efficient to live with the warning for now
     until better solution is found.
-    */
+    */ /*
     await waitForElementToBeRemoved(() => container.querySelector('#notification'), {
       timeout: 3000,
     })

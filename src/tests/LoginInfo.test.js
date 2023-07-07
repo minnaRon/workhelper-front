@@ -41,6 +41,9 @@ describe('<LoginForm />', () => {
           },
         },
       },
+      working: {
+        view: '/work',
+      },
     })
 
     component = renderer.create(

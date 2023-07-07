@@ -93,7 +93,7 @@ export const logout = (user) => {
     await dispatch(setUsers(null))
     await dispatch(setWorks([]))
     await dispatch(setCurrentWork(null))
-    await dispatch(setCurrentView(null))
+    await dispatch(setCurrentView('/'))
     dispatch(
       showNotification(`${m.userRedIlogoutstart} ${user.name}, ${m.userRedIlogoutend}`)
     )

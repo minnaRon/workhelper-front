@@ -4,6 +4,8 @@
  * exports Notification as default
  */
 import { useSelector } from 'react-redux'
+import Stack from '@mui/material/Stack'
+import Alert from '@mui/material/Alert'
 
 const Notification = () => {
   const notification = useSelector((state) => state.notification)
@@ -12,18 +14,11 @@ const Notification = () => {
     return null
   }
 
-  const style = {
-    color: notification.type === 'error' ? 'red' : 'green',
-    background: notification.type === 'error' ? 'white' : 'white',
-    fontSize: 15,
-    borderStyle: 'solid',
-    borderRadius: 5,
-    padding: 10,
-  }
-
   return (
-    <div id="notification" style={style}>
-      {notification.message}
+    <div id="notification">
+      <Stack sx={{ width: '100%' }}>
+        <Alert severity={notification.type}> {notification.message}</Alert>
+      </Stack>
     </div>
   )
 }

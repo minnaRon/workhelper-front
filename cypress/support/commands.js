@@ -5,7 +5,6 @@ Cypress.Commands.add('createUser', ({ username, name, password, language }) => {
     password,
     language,
   })
-  cy.visit('http://localhost:3000')
 })
 
 Cypress.Commands.add('login', ({ username, password }) => {

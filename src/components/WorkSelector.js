@@ -13,6 +13,13 @@ import { useNavigate } from 'react-router-dom'
 import { addWork } from '../reducers/worksRed'
 import { updateUser } from '../reducers/usersRed'
 import { updateWork } from '../reducers/worksRed'
+import TextField from '@mui/material/TextField'
+import Autocomplete from '@mui/material/Autocomplete'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
 
 const WorkSelector = () => {
   const works = useSelector((state) => state.works)
@@ -25,7 +32,6 @@ const WorkSelector = () => {
   const [workType, setWorkType] = useState(selectedWork.type || 'working at home')
   const [newWorkName, setNewWorkName] = useState('')
   const [newWorkType, setNewWorkType] = useState('')
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -62,7 +68,6 @@ const WorkSelector = () => {
   /**
    * @description Function handles submit of the information of the selected work.
    * @param {*} event - not in use here, uses state values.
-   * Asks to confirm information of the selected work; work name, type of working, marked as project.
    * Checks if type of working is new and typed in the input field newWorkType.
    * * if type of working is new, dispatch update to user's workTypes.
    * Checks if work is new and typed in the input field newWorkName.
@@ -72,33 +77,22 @@ const WorkSelector = () => {
    */
   const handleSubmit = (event) => {
     event.preventDefault()
-    if (
-      window.confirm(
-        `ALOITATKO TYÖSKENTELYN TIEDOILLA:
-        ${newWorkName || selectedWork.name}, ${isProject ? 'PROJEKTI' : ''}
-        ${newWorkType || workType} ?`
-      )
-    ) {
-      if (newWorkType && isNew(newWorkType)) {
-        const updatedWorkTypes = [...user.workTypes, newWorkType]
-        dispatch(updateUser({ workTypes: updatedWorkTypes }))
-      }
-
-      if (newWorkName) {
-        const newWork = {
-          name: newWorkName,
-          isProject: isProject || false,
-          type: newWorkType || workType,
-        }
-        dispatch(addWork(newWork))
-      } else {
-        dispatch(
-          updateWork({ ...selectedWork, isProject, type: newWorkType || workType })
-        )
-      }
-      setNewWorkName('')
-      setNewWorkType('')
+    if (newWorkType && isNew(newWorkType)) {
+      const updatedWorkTypes = [...user.workTypes, newWorkType]
+      dispatch(updateUser({ workTypes: updatedWorkTypes }))
     }
+    if (newWorkName) {
+      const newWork = {
+        name: newWorkName,
+        isProject: isProject || false,
+        type: newWorkType || workType,
+      }
+      dispatch(addWork(newWork))
+    } else {
+      dispatch(updateWork({ ...selectedWork, isProject, type: newWorkType || workType }))
+    }
+    setNewWorkName('')
+    setNewWorkType('')
   }
 
   /**
@@ -106,13 +100,10 @@ const WorkSelector = () => {
    * @description option list for work select menu
    * @returns list of the select options of the work names to use in the select menu.
    */
-  const optionsSelectWork = works.map((work) => {
-    return (
-      <option key={work.id} value={work.id} disabled={newWorkName}>
-        {work.name}
-      </option>
-    )
-  })
+  const optionsSelectWorkForAutoComplete = works.map((work) => ({
+    ...work,
+    label: work.name,
+  }))
 
   /**
    * handler changeWorkHandler
@@ -120,11 +111,12 @@ const WorkSelector = () => {
    * Sets correct values of the selected work for local states: selectedWork, isProject, workType
    * These values will be shown in the form as default before submit is done.
    */
-  const changeWorkHandler = (event) => {
-    const work = works.filter((w) => w.id.toString() === event.target.value)[0]
-    setSelectedWork(work)
-    setIsProject(work.isProject)
-    setWorkType(work.type)
+  const workHandler = (work) => {
+    if (work) {
+      setSelectedWork(work)
+      setIsProject(work.isProject)
+      setWorkType(work.type)
+    }
   }
 
   /**
@@ -132,71 +124,89 @@ const WorkSelector = () => {
    * @description radio option list of types of working.
    * @returns list of the radio options of the work types.
    */
-  const optionsRadioWorkType = user.workTypes.map((type) => {
-    return (
-      <div key={type}>
-        <input
-          type="radio"
-          name="work-type"
-          value={workType}
-          checked={type === workType}
-          onChange={() => setWorkType(type)}
-          disabled={newWorkType}
-        />
-        {type}
-      </div>
-    )
-  })
+  const optionsSelectWorkTypeForAutoComplete = user.workTypes.map((type) => ({
+    type,
+    label: type,
+  }))
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>{v.WSH1headlineT}</h1>
-      <label>
-        {v.WSSworkT}
-        <select id="workSelector-select-work" onChange={changeWorkHandler}>
-          {optionsSelectWork}
-        </select>
-      </label>
-      <br />
-      <br />
-      {v.WSInewWorkT}
-      <input
-        id="workSelector-input-newWork"
-        type="text"
-        value={newWorkName}
-        placeholder={v.WSInewWorkP}
-        onChange={({ target }) => {
-          setNewWorkName(target.value)
-        }}
-      />
-      <hr />
-      <input
-        type="checkbox"
-        id="workSelector-checkbox-isProject"
-        checked={isProject}
-        onChange={({ target }) => setIsProject(target.checked)}
-      />
-      {v.WSCisProjectT}
-      <hr />
-      <label>
-        {v.WSRworkTypeT}
-        {optionsRadioWorkType}
-      </label>
-      <br />
-      {v.WSInewWorkTypeT}
-      <input
-        id="workSelector-input-newWorkType"
-        type="text"
-        value={newWorkType}
-        placeholder={v.WSInewWorkTypeP}
-        onChange={({ target }) => {
-          setNewWorkType(target.value)
-        }}
-      />
-      <hr />
-      <button type="submit" id="workSelector-button-submit">
-        {v.WSBsubmitT}
-      </button>
+      <Grid container pb={4} align="start" justifyContent="center" rowSpacing={2}>
+        <Grid item xs={12} mr={7}>
+          <Typography variant="h5">{v.WSH1headlineT}</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Autocomplete
+            disabled={newWorkName.length > 0}
+            isOptionEqualToValue={(option, value) => option.id === value.id}
+            disablePortal
+            size="small"
+            id="workSelector-select-work"
+            value={selectedWork.name}
+            options={optionsSelectWorkForAutoComplete}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label={v.WSSworkT} />}
+            onChange={(event, newValue) => {
+              workHandler(newValue)
+            }}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            size="small"
+            label={v.WSInewWorkT}
+            id="workSelector-input-newWork"
+            type="text"
+            value={newWorkName}
+            placeholder={v.WSInewWorkP}
+            onChange={({ target }) => {
+              setNewWorkName(target.value)
+            }}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <FormControlLabel
+            id="workSelector-checkbox-isProject"
+            control={<Checkbox checked={isProject || false} />}
+            label={v.WSCisProjectT}
+            onChange={(e) => setIsProject(e.target.checked)}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Autocomplete
+            disabled={newWorkType.length > 0}
+            isOptionEqualToValue={(option, value) => option.type === value}
+            disablePortal
+            value={workType || ''}
+            size="small"
+            id="workSelector-select-newWorkTypek"
+            options={optionsSelectWorkTypeForAutoComplete}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label={v.WSRworkTypeT} />}
+            onChange={(event, newValue) => {
+              setWorkType(newValue.type)
+            }}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            size="small"
+            label={v.WSInewWorkTypeT}
+            id="workSelector-input-newWorkType"
+            type="text"
+            value={newWorkType}
+            placeholder={v.WSInewWorkTypeP}
+            onChange={({ target }) => {
+              setNewWorkType(target.value)
+            }}
+          />
+        </Grid>
+        <Grid item xs>
+          <Button variant="contained" type="submit" id="workSelector-button-submit">
+            {v.WSBsubmitT}
+          </Button>
+        </Grid>
+      </Grid>
     </form>
   )
 }

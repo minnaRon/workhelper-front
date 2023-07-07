@@ -103,7 +103,7 @@ const vocabularies = [
           NUFBbackT: 'BACK',
         },
         workselector: {
-          WSH1headlineT: 'Hello Work!',
+          WSH1headlineT: 'SELECT: ',
           WSSworkT: 'object of work: ',
           WSInewWorkT: '...or add a new one: ',
           WSInewWorkP: 'add a new work item',
@@ -158,7 +158,7 @@ const vocabularies = [
           NUFBbackT: 'TAKAISIN',
         },
         workselector: {
-          WSH1headlineT: 'Työn iloihin!',
+          WSH1headlineT: 'VALITSE: ',
           WSSworkT: 'TYÖN KOHDE: ',
           WSInewWorkT: '...TAI LISÄÄ UUSI: ',
           WSInewWorkP: 'LISÄÄ UUSI TYÖ',
